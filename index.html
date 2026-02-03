@@ -1,77 +1,197 @@
 <!DOCTYPE html>
+
 <html lang="ja">
+
 <head>
+
   <meta charset="UTF-8">
-  <title>学生応援メッセージ</title>
+
+  <title>推しトモ研究所</title>
+
   <style>
+
     body {
-      font-family: "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
-      background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
 
-    .container {
-      background: white;
-      padding: 30px;
-      border-radius: 15px;
+      font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+
+      background: #f4f6fb;
+
       text-align: center;
-      width: 90%;
-      max-width: 400px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+
+      padding: 30px;
+
     }
 
-    h1 {
-      font-size: 22px;
-      margin-bottom: 20px;
-    }
+    .card {
 
-    #message {
-      font-size: 18px;
-      margin: 20px 0;
-      min-height: 60px;
+      background: #fff;
+
+      padding: 20px;
+
+      border-radius: 12px;
+
+      max-width: 420px;
+
+      margin: auto;
+
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
     }
 
     button {
-      background-color: #4facfe;
-      color: white;
+
+      margin: 10px;
+
+      padding: 10px 16px;
+
       border: none;
-      padding: 12px 20px;
-      font-size: 16px;
-      border-radius: 25px;
+
+      border-radius: 8px;
+
+      background: #6c8cff;
+
+      color: #fff;
+
       cursor: pointer;
+
     }
 
     button:hover {
-      background-color: #00c6fb;
+
+      background: #5a78e0;
+
     }
+
+    .meter {
+
+      margin-top: 10px;
+
+      font-weight: bold;
+
+    }
+
   </style>
+
 </head>
+
 <body>
-  <div class="container">
-    <h1>📣 今日の励ましメッセージ</h1>
-    <div id="message">ボタンを押してね！</div>
-    <button onclick="showMessage()">メッセージを表示</button>
-  </div>
 
-  <script>
-    const messages = [
-      "今の努力は、必ず未来の自分を助けるよ。",
-      "完璧じゃなくていい。一歩進めたならそれで十分。",
-      "失敗は成長の途中。挑戦している証拠だよ。",
-      "今日は今日のベストを尽くせばOK！",
-      "自分を信じて。あなたは思っているよりずっとすごい。",
-      "休むことも大切。無理しすぎないでね。",
-      "続けているだけで、もう立派だよ。"
-    ];
 
-    function showMessage() {
-      const randomIndex = Math.floor(Math.random() * messages.length);
-      document.getElementById("message").textContent = messages[randomIndex];
-    }
-  </script>
+<h1>推しトモ研究所</h1>
+
+
+<div class="card">
+
+  <p>名前を入力してください</p>
+
+  <input id="nameInput" placeholder="名前">
+
+  <br>
+
+  <button onclick="createFriend()">生成する</button>
+
+
+  <div id="result"></div>
+
+</div>
+
+
+<script>
+
+  let affection = 50;
+
+  let personality = "";
+
+
+  const personalities = [
+
+    "穏健型",
+
+    "情熱型",
+
+    "理知型",
+
+    "自由型",
+
+    "慎重型"
+
+  ];
+
+
+  const events = [
+
+    "少し落ち込んでいるようだ",
+
+    "新しいことに挑戦したそうだ",
+
+    "誰かと話したい気分らしい",
+
+    "今日はとても機嫌がいい"
+
+  ];
+
+
+  function createFriend() {
+
+    const name = document.getElementById("nameInput").value;
+
+    if (!name) return alert("名前を入力してね");
+
+
+    personality = personalities[Math.floor(Math.random() * personalities.length)];
+
+
+    document.getElementById("result").innerHTML = `
+
+      <h2>${name}</h2>
+
+      <p>性格：${personality}</p>
+
+      <p class="meter">関係度：${affection}</p>
+
+      <button onclick="eventTime()">今日の出来事</button>
+
+    `;
+
+  }
+
+
+  function eventTime() {
+
+    const event = events[Math.floor(Math.random() * events.length)];
+
+
+    document.getElementById("result").innerHTML += `
+
+      <p>📌 ${event}</p>
+
+      <button onclick="react(10)">話しかける</button>
+
+      <button onclick="react(0)">見守る</button>
+
+      <button onclick="react(-5)">距離を置く</button>
+
+    `;
+
+  }
+
+
+  function react(value) {
+
+    affection += value;
+
+    if (affection > 100) affection = 100;
+
+    if (affection < 0) affection = 0;
+
+
+    alert("関係度が変化しました：" + affection);
+
+    document.querySelector(".meter").innerText = "関係度：" + affection;
+  }
+</script>
+
 </body>
 </html>
+
+
