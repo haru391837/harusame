@@ -1,1 +1,77 @@
-# harusame
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>学生応援メッセージ</title>
+  <style>
+    body {
+      font-family: "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+      background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    #message {
+      font-size: 18px;
+      margin: 20px 0;
+      min-height: 60px;
+    }
+
+    button {
+      background-color: #4facfe;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 25px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #00c6fb;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📣 今日の励ましメッセージ</h1>
+    <div id="message">ボタンを押してね！</div>
+    <button onclick="showMessage()">メッセージを表示</button>
+  </div>
+
+  <script>
+    const messages = [
+      "今の努力は、必ず未来の自分を助けるよ。",
+      "完璧じゃなくていい。一歩進めたならそれで十分。",
+      "失敗は成長の途中。挑戦している証拠だよ。",
+      "今日は今日のベストを尽くせばOK！",
+      "自分を信じて。あなたは思っているよりずっとすごい。",
+      "休むことも大切。無理しすぎないでね。",
+      "続けているだけで、もう立派だよ。"
+    ];
+
+    function showMessage() {
+      const randomIndex = Math.floor(Math.random() * messages.length);
+      document.getElementById("message").textContent = messages[randomIndex];
+    }
+  </script>
+</body>
+</html>
